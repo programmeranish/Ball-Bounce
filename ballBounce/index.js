@@ -22,16 +22,25 @@ let ballStartPosition = 0;
 let ballPosition = ballStartPosition;
 let ballBouncePosition = 0;
 
-function moveBall() {}
-
 // moving ball
+let moveBallWhere = moveBallDown;
 setInterval(() => {
+  moveBallWhere();
   ball.style.top = `${ballPosition}px`;
-  if (ballPosition < 700) ballPosition = ballPosition + 1;
-  else {
-    ballPosition = ballPosition - 1;
+  if (ballPosition === 0) {
+    moveBallWhere = moveBallDown;
+  }
+  if (ballPosition === 500) {
+    moveBallWhere = moveBallUp;
   }
 }, 1000 / 60);
+
+function moveBallDown() {
+  ballPosition += 1;
+}
+function moveBallUp() {
+  ballPosition -= 1;
+}
 
 environment.appendChild(ball);
 body.appendChild(environment);
